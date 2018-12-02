@@ -2,6 +2,7 @@ import {_, $, Backbone, Marionette, Radio} from '../vendor/vendor';
 import {isVisible, isVisibleVertical, isTouchDevice} from '../util/util';
 import {SizeToScreenBehavior} from '../behaviors/behaviors';
 import {ImageView} from './imageview';
+import Player from '@vimeo/player';
 import 'lazysizes';
 // unveilhooks extension
 /*! lazysizes - v4.0.1 */
@@ -33,7 +34,7 @@ var VideoView = Marionette.View.extend({
     },
     onResize: function(){
         this.triggerMethod('size');
-    },  
+    },
     radioEvents: {
         events: {
             'window:resize': 'onResize',
@@ -101,25 +102,56 @@ var VideoPreviewView = Marionette.View.extend({
     },
     vimeoShown: false,
     onContentClick: function(e){
+        var element =  this.$el;
+        var player;
         e.stopPropagation();
         this.$el.find('.play-video').hide();
         this.$el.append(`
             <div class="iframe-wrap">
                 <div class="video-background"></div>
-                <iframe src="https://player.vimeo.com/video/`+this.model.get('vimeo_video_id')+`?autoplay=1&loop=1&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe id="${this.model.get('vimeo_video_id')}" src="https://player.vimeo.com/video/`+this.model.get('vimeo_video_id')+`?autoplay=1&title=0&byline=0&portrait=0&playsinline=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
         `);
-        
+
+        player = new Player(`${this.model.get('vimeo_video_id')}`);
+
+        player.on('timeupdate', function(){
+			player.getEnded().then(function(ended) {
+				if(ended === true) {
+					resetVideoContainer();
+                }
+			}).catch(function(error) {
+				// an error occurred
+			});
+        });
+
         if(!isTouchDevice){
-            this.$el.find('video')[0].pause();
+            player.pause();
         }
+
+        if (isTouchDevice) {
+			player.on('pause', function () {
+				resetVideoContainer();
+			})
+        }
+
+        function resetVideoContainer(){
+			player.destroy().then(function() {
+				element.removeClass('hide-content');
+				element.find('.iframe-wrap').hide();
+				element.find('.play-video').show();
+			}).catch(function(error) {
+				// an error occurred
+			});
+        }
+
 
         this.$el.addClass('hide-content');
         this.triggerMethod('size');
         this.vimeoShown = true;
     },
     onPauseVideo: function(){
-        if(this.vimeoShown){        
+        if(this.vimeoShown){
             this.vimeoShown = false;
             this.$el.find('.video-background, .iframe-wrap').remove();
             this.$el.find('.play-video').show();
@@ -133,7 +165,7 @@ var VideoPreviewView = Marionette.View.extend({
     },
     onPlayVideo: function(){
         if(!this.vimeoShown && !isTouchDevice){
-            this.$el.find('video')[0].play();            
+            this.$el.find('video')[0].play();
         }
     },
     onRender: function(){
@@ -150,7 +182,7 @@ var VideoPreviewView = Marionette.View.extend({
     },
     onResize: function(){
         this.triggerMethod('size');
-    },  
+    },
     radioEvents: {
         events: {
             'window:resize': 'onResize',
