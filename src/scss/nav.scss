@@ -1,0 +1,159 @@
+@media (min-width: 700px){
+    html.webkit{
+        #nav-region{
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+        #nav-region::-webkit-scrollbar {
+            width: 0;
+        }
+    }
+}
+
+#nav-region.active .nav-items{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (min-width: 700px){
+    body.intro-visible{
+        #nav-region, .navbar{
+            top: 100vh;
+            position: absolute; 
+        }
+    }
+    body.intro-hidden{
+        #nav-region, .navbar{
+            top: 0;
+            position: fixed; 
+        }    
+    }
+    .navbar{
+        left: 0;
+        right: 0;
+        height: $menu_h;
+        background: white;    
+        z-index: 2;    
+    }
+    .nav-items{
+        white-space: nowrap;
+    }
+    #nav-region{
+        overflow: hidden;
+        margin-left: 140px;
+        margin-right: 70px;
+        box-sizing: border-box;
+    }
+    #nav-region::-webkit-scrollbar {
+        width: 0;
+    }
+    #nav-region{
+        left: 0;
+        right: 0;
+        height: $menu_h;
+        text-align: right;
+        z-index: 3;
+        background: white;
+        .nav-items{
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 500ms ease;
+        }
+        .nav-item:hover{
+            opacity: 1;
+        }
+        .nav-item.active{
+            opacity: 1;
+        }
+        .nav-item{
+            opacity: 0.5;
+            display: inline-block;
+            padding-right: 10px;
+            padding-left: 10px;
+            cursor: pointer;
+            height: inherit;
+            position: relative;
+            vertical-align: top;
+            img{
+                position: relative;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+        }
+        .nav-item:last-child{
+    
+        }
+        >div{
+            height: inherit;
+        }
+    }
+}
+
+$m_navbar_border_h: 2px;
+
+@media (max-width: 699px){
+    .navbar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: $m_navbar_h;
+        width: 100%;
+        z-index: 4;
+        background: white;
+        border-bottom: solid $m_navbar_border_h black;
+    }
+    #nav-region{
+        top: $m_navbar_h + $m_navbar_border_h;
+        position: fixed; 
+        z-index: 3;
+        width: 100%;
+        background: white;
+        .nav-item{
+            height: 40px;
+            display: block;
+            width: 100%;
+            border-bottom: 1px solid $gray;
+            text-align: center;
+            img{
+                display: inline-block;
+                position: relative;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+        }
+        .nav-item img{
+            opacity: 0.5;
+        }
+        .nav-item:hover img{
+            opacity: 1;
+        }
+        .nav-item.active img{
+            opacity: 1;
+        }
+    }
+    .nav-item{
+        padding-bottom: 7px;
+        padding-top: 7px;
+    }
+    #nav-region.active{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    #nav-region{
+        opacity: 0;
+        transition: all 400ms ease;
+        transform: translateY(-100%);
+    }
+}
+
+.nav-items{
+    max-height: calc(100vh - #{$m_navbar_h + $m_navbar_border_h});
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-items::-webkit-scrollbar {
+    width: 0;
+}

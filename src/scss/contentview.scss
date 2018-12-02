@@ -1,0 +1,28 @@
+.content-view{
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    // cursor: pointer;
+}
+
+.content-child-view{
+    position: relative;
+}
+
+@media (min-width: 700px){
+    .content-child-view{
+        height: 100vh;
+    }
+    .content-view{
+        top: 100vh;
+    }
+}
+
+@media (max-width: 699px){
+    .content-child-view{
+        height: $m_slide_h;
+    }
+    .content-view{
+        top: $m_slide_h;
+    }
+}

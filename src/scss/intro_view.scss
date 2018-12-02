@@ -1,0 +1,77 @@
+.intro-view{
+    background: black;
+}
+
+.down-arrow{
+    width: 30px;
+    path{
+        fill: white;
+    }
+}
+
+.intro-view  .video{
+
+}
+
+.intro-view{
+    width: 100%;
+    position: fixed;
+    left: 0;
+    overflow: hidden;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.intro-logo{
+    width: 90%;
+    max-width: 700px;
+    max-height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.down-arrow{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 6;
+	opacity: 0.8;
+	animation: bounce 2s infinite;
+	transition: opacity 200ms ease;
+	opacity: 1;
+	bottom: 15px;
+}
+@keyframes bounce {
+	0% {
+    transform: translate(-50%, 0);
+  }
+	50% {
+    transform: translate(-50%, -10px);
+  }
+	100% {
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (min-width: 700px){
+    .intro-view  .video{
+        height: 100vh;
+    }
+    .intro-view{
+        height: 100vh;
+        top: 0;
+    }
+}
+
+@media (max-width: 699px){
+    .intro-view  .video{
+        height: $m_slide_h;
+    }
+    .intro-view{
+        height: $m_slide_h;
+        top: $m_navbar_h;
+    }
+}

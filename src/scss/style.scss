@@ -1,0 +1,71 @@
+$gray: #cccccc;
+$space_lr: 23px;
+$space_tb: 23px;
+
+$menu_h: 82px;
+$m_navbar_h: 60px;
+$m_slide_h: calc(100vh - #{$m_navbar_h});
+$m_space_lr: 18px;
+$m_space_tb: 18px;
+
+::-moz-selection { background: transparent; }
+::selection { background: transparent; }
+
+html{
+    width: 100%;
+}
+
+body{
+    margin: 0;
+    overflow-y: scroll;
+    width: 100%;
+    overflow-x: hidden;
+    font-size: 0;
+}
+
+@media (max-width: 699px){
+    body{
+        padding-top: $m_navbar_h;        
+    }
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+a:hover{
+    
+}
+
+ul{
+    padding: 0;
+}
+
+html,
+body,
+#wkny,
+.root-view,
+.frontpage-view{
+    min-height: 100%;
+}
+
+.logo{
+    width: 100px;
+}
+
+.lazyload,
+.lazyloading {
+	opacity: 0;
+}
+.lazyloaded {
+	opacity: 1;
+	transition: opacity 300ms;
+}
+
+@import 'intro_view';
+@import 'contentview';
+@import 'slider';
+@import 'flickity';
+@import 'button';
+@import 'nav';
