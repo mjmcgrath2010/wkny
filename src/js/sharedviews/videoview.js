@@ -59,18 +59,17 @@ var VideoSimple = Marionette.View.extend({
 // need ".video-background" to have a dark background while iframe is rendering
 var VideoPreviewView = Marionette.View.extend({
     className: 'video-preview',
-    template: _.template(`
-        <div class="play-video-wrap">
-            <svg class="play-video" width="34px" height="50px" viewBox="0 0 34 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g id="Mobile" transform="translate(-18.000000, -564.000000)" fill="#FFFFFF">
-                        <polygon id="Triangle" points="52 589 18 614 18 564"></polygon>
-                    </g>
-                </g>
-            </svg>
-        </div>
-        <div class="content-region"></div>
-        `
+    template: _.template(`<div class="play-video-wrap">
+    <svg class="play-video" width="34px" height="50px" viewBox="0 0 34 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Mobile" transform="translate(-18.000000, -564.000000)" fill="#FFFFFF">
+                <polygon id="Triangle" points="52 589 18 614 18 564"></polygon>
+            </g>
+        </g>
+    </svg>
+</div>
+<div class="content-region"></div>
+`
     ),
     ui: {
         content: function(){
