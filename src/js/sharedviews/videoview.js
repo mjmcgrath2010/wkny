@@ -127,12 +127,12 @@ var VideoPreviewView = Marionette.View.extend({
         if(!isTouchDevice){
             player.pause();
         }
-
-        if (isTouchDevice) {
-			player.on('pause', function () {
-				resetVideoContainer();
-			})
-        }
+        //
+        // if (isTouchDevice) {
+		// 	player.on('pause', function () {
+		// 		resetVideoContainer();
+		// 	})
+        // }
 
         function resetVideoContainer(){
 			player.destroy().then(function() {
