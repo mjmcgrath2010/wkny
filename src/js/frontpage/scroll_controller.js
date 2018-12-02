@@ -40,7 +40,7 @@ var setIxScroll = function() {
         eventsChannel.trigger('scrolled:to:slide', ix);
         if(isTouchDevice){
             eventsChannel.trigger('scroll:locked:in', ix);
-        }       
+        }
     }
     lastIx = ix;
 }
@@ -48,6 +48,6 @@ var setIxScroll = function() {
 var doFrontpageLockinScroll = _.debounce(function() {
     stopScrollAnimation();
     animateToScrollPos(ix);
-}, 300);
+}, 0);
 
 export {initFrontpageScroll, referenceHeight};

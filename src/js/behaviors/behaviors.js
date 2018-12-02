@@ -1,5 +1,6 @@
 import {_, $, Backbone, Marionette} from '../vendor/vendor';
-import {Root} from '../app'; 
+import {isTouchDevice} from '../util/util';
+import {Root} from '../app';
 import 'jquery.waitforimages';
 
 const AddLoadedClassToImageBehavior = Marionette.Behavior.extend({
@@ -15,17 +16,17 @@ const SizeToScreenBehavior = Marionette.Behavior.extend({
     onSize: function(){
         // console.log(this.getOption('mode'));
         var w_w = $('body').innerWidth();
-        var w_h = window.innerHeight;      
-        
+        var w_h = window.innerHeight;
+
         var this_w = this.view.model.get('width');
         var this_h = this.view.model.get('height');
 
         var this_ar = this_w/this_h;
 
         // max size in percentage
-        var target_width, target_height;        
+        var target_width, target_height;
         var bool = true;
-        var mode = window.innerWidth < 700 ? 'fullscreen' : this.getOption('mode'); 
+        var mode = window.innerWidth < 700 ? 'fullscreen' : this.getOption('mode');
         switch(mode){
             case 'fullscreen':
                 target_width = $('body').innerWidth();
