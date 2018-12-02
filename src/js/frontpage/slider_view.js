@@ -8,7 +8,7 @@ import 'lazysizes';
 const eventsChannel = Radio.channel('events');
 
 var SliderChildView = Marionette.View.extend({
-    className: 'slider-child-view',
+    className: 'slider-child-view vh-fix',
     template: _.template(`
         <div class="slide-content-region"></div>
         <div class="bottom-right slider-counter"></div>
