@@ -101,8 +101,8 @@ var VideoPreviewView = Marionette.View.extend({
     },
     vimeoShown: false,
     onContentClick: function(e){
-        var element =  this.$el;
-        var player;
+        var element =  this.$el,
+            player;
         e.stopPropagation();
         this.$el.find('.play-video').hide();
         this.$el.append(`
@@ -112,27 +112,29 @@ var VideoPreviewView = Marionette.View.extend({
             </div>
         `);
 
-        player = new Player(`${this.model.get('vimeo_video_id')}`);
+        if (this.model.get('vimeo_video_id')) {
+			player = new Player(`${this.model.get('vimeo_video_id')}`);
 
-        player.on('timeupdate', function(){
-			player.getEnded().then(function(ended) {
-				if(ended === true) {
-					resetVideoContainer();
-                }
-			}).catch(function(error) {
-				// an error occurred
+			player.on('timeupdate', function(){
+				player.getEnded().then(function(ended) {
+					if(ended === true) {
+						resetVideoContainer();
+					}
+				}).catch(function(error) {
+					// an error occurred
+				});
 			});
-        });
+        }
 
         if(!isTouchDevice){
             player.pause();
         }
-        //
-        // if (isTouchDevice) {
-		// 	player.on('pause', function () {
-		// 		resetVideoContainer();
-		// 	})
-        // }
+
+        if (isTouchDevice && player) {
+			player.on('pause', function () {
+				resetVideoContainer();
+			})
+        }
 
         function resetVideoContainer(){
 			player.destroy().then(function() {

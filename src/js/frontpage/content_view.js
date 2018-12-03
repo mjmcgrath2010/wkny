@@ -21,9 +21,9 @@ var ContentChildView = Marionette.View.extend({
         this.showChildView('slider', sliderView);
     },
     onAttach: function(){
-        eventsChannel.trigger('content:attached');        
+        eventsChannel.trigger('content:attached');
     }
-    
+
 });
 
 var ContentCollectionView = Marionette.CollectionView.extend({
@@ -33,9 +33,9 @@ var ContentCollectionView = Marionette.CollectionView.extend({
         ix = ix-1;
         this.children.each(function(view, index){
             if(index == ix){
-                view.$el.addClass('active');                
+                view.$el.addClass('active');
             }else{
-                view.$el.removeClass('active');               
+                view.$el.removeClass('active');
             }
         });
     },
