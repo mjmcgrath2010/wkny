@@ -8,7 +8,7 @@ import 'lazysizes';
 const eventsChannel = Radio.channel('events');
 
 var SliderChildView = Marionette.View.extend({
-    className: 'slider-child-view',
+    className: 'slider-child-view vh-fix',
     template: _.template(`
         <div class="slide-content-region"></div>
         <div class="bottom-right slider-counter"></div>
@@ -111,34 +111,29 @@ var SliderCollectionView = Marionette.CollectionView.extend({
         });
     },
     onDestroy: function(){
-        
+
     }
 });
 
 var SliderView = Marionette.View.extend({
     className: 'slider-view',
     template: _.template(`
-        <img src="<%- client_svg.url %>" class="client-logo">
-        <div class="slider-collection-region"></div>
-        <div class="bottom-left">
-            <span class="client _client"><%- client %>: </span><span class="caption _Default"></span>
-        </div>
-        <svg class="prev-button" width="18px" height="32px" viewBox="0 0 18 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="Desktop-menu-open" transform="translate(-23.000000, -428.000000)" stroke="#000000" stroke-width="2">
-                    <polyline id="Path-2" transform="translate(32.500000, 444.000000) rotate(-180.000000) translate(-32.500000, -444.000000) " points="25 429 40 444.318087 25.6229633 459"></polyline>
-                </g>
-            </g>
-        </svg>
-        <svg class="next-button" width="18px" height="32px" viewBox="0 0 18 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="Desktop-menu-open" transform="translate(-1396.000000, -428.000000)" stroke="#000000" stroke-width="2">
-                    <polyline id="Path-2" points="1397 429 1412 444.318087 1397.62296 459"></polyline>
-                </g>
-            </g>
-        </svg>
-
-        <div class="bottom-right counter _Default"></div>
+    <img src="<%- client_svg.url %>" class="client-logo">
+    <div class="slider-collection-region"></div>
+    <div class="bottom">
+        <span class="caption _client"><%- client %>:</span>
+        <span class="counter _client"></span>
+    </div>
+    <svg class="prev-button" width="18px" height="32px" viewBox="0 0 18 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-menu-open" transform="translate(-23.000000, -428.000000)" stroke="#000000" stroke-width="2">
+        <polyline id="Path-2" transform="translate(32.500000, 444.000000) rotate(-180.000000) translate(-32.500000, -444.000000) " points="25 429 40 444.318087 25.6229633 459"></polyline>
+          </g></g></svg> <svg class="next-button" width="18px" height="32px" viewBox="0 0 18 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Desktop-menu-open" transform="translate(-1396.000000, -428.000000)" stroke="#000000" stroke-width="2">
+          <polyline id="Path-2" points="1397 429 1412 444.318087 1397.62296 459"></polyline>
+          </g></g>
+      </svg>
     `),
     childViewEvents: {
         'slide:select': 'onSlideSelected'
@@ -158,7 +153,7 @@ var SliderView = Marionette.View.extend({
         }
         else if(el.classList == "next-slider-button"){
             this.$el.find('.prev-button').removeClass('show');
-            this.$el.find('.next-button').addClass('show');            
+            this.$el.find('.next-button').addClass('show');
         }else{
             this.$el.find('.prev-button').removeClass('show');
             this.$el.find('.next-button').removeClass('show');
@@ -196,7 +191,7 @@ var SliderView = Marionette.View.extend({
         var collection = new Backbone.Collection(this.model.get('media'));
         var sliderCollectionView = new SliderCollectionView({collection: collection});
         this.showChildView('collection', sliderCollectionView);
-        bindPlayPauseSliderVideosOnScroll(sliderCollectionView);        
+        bindPlayPauseSliderVideosOnScroll(sliderCollectionView);
     }
 });
 
